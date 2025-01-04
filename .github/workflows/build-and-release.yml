@@ -154,13 +154,18 @@ jobs:
           # Specify the NSIS version you want to install. For the latest, leave it blank or specify the version explicitly (e.g., '3.09').
           nsis-version: '3.09'
 
+      - name: Debug Build Directory
+        run: |
+          echo "Debugging contents of build/release:"
+          dir build/release
+
       - name: Create NSIS Installer
         run: |
           cd build
-          # Save the NSIS script (replace 'installer.nsi' with your script name)
+          # Save the NSIS script
           echo '!define APP_NAME "Number System Converter GUI"' > installer.nsi
-          echo '!define EXE_FILE "release\NumberSystemConverterGUI.exe"' >> installer.nsi
-          echo '!define INSTALL_DIR "$PROGRAMFILES\Number System Converter GUI"' >> installer.nsi
+          echo '!define EXE_FILE "release\\NumberSystemConverterGUI.exe"' >> installer.nsi
+          echo '!define INSTALL_DIR "$PROGRAMFILES\\Number System Converter GUI"' >> installer.nsi
           echo 'OutFile "NumberSystemConverterGUI-Setup.exe"' >> installer.nsi
           echo 'InstallDir $INSTALL_DIR' >> installer.nsi
           echo 'Page directory' >> installer.nsi
@@ -168,11 +173,15 @@ jobs:
           echo 'Section' >> installer.nsi
           echo '  SetOutPath "$INSTDIR"' >> installer.nsi
           echo '  File "$EXE_FILE"' >> installer.nsi
-          echo '  CreateShortCut "$DESKTOP\Number System Converter GUI.lnk" "$INSTDIR\NumberSystemConverterGUI.exe"' >> installer.nsi
+          echo '  CreateShortCut "$DESKTOP\\Number System Converter GUI.lnk" "$INSTDIR\\NumberSystemConverterGUI.exe"' >> installer.nsi
           echo 'SectionEnd' >> installer.nsi
-          # Build the installer
-          makensis installer.nsi
+          # Build the installer using makensis
+          makensis -nocd installer.nsi
 
+      - name: Debug Installer Creation
+        run: |
+          echo "Debugging contents of build:"
+          dir build
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v4.5.0

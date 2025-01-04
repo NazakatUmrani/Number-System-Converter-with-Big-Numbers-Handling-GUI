@@ -163,24 +163,19 @@ jobs:
         run: |
           cd build
           
-          # Define variables explicitly
-          $APP_NAME = "Number System Converter GUI"
-          $EXE_FILE = "release\\NumberSystemConverterGUI.exe"
-          $INSTALL_DIR = "$PROGRAMFILES\\Number System Converter GUI"
-          
           # Write the NSIS script
-          echo "!define APP_NAME "$APP_NAME"" > installer.nsi
-          echo "!define EXE_FILE "$EXE_FILE"" >> installer.nsi
-          echo "!define INSTALL_DIR "$INSTALL_DIR"" >> installer.nsi
-          echo "OutFile "NumberSystemConverterGUI-Setup.exe"" >> installer.nsi
-          echo "InstallDir $INSTALL_DIR" >> installer.nsi
-          echo "Page directory" >> installer.nsi
-          echo "Page instfiles" >> installer.nsi
-          echo "Section" >> installer.nsi
-          echo "  SetOutPath "$INSTDIR"" >> installer.nsi
-          echo "  File "$EXE_FILE"" >> installer.nsi
-          echo "  CreateShortCut "$DESKTOP\\$APP_NAME.lnk" "$INSTDIR\\NumberSystemConverterGUI.exe"" >> installer.nsi
-          echo "SectionEnd" >> installer.nsi
+          echo '!define APP_NAME "Number System Converter GUI"' > installer.nsi
+          echo '!define EXE_FILE "release/NumberSystemConverterGUI.exe"' >> installer.nsi
+          echo '!define INSTALL_DIR "$PROGRAMFILES\\Number System Converter GUI"' >> installer.nsi
+          echo 'OutFile "NumberSystemConverterGUI-Setup.exe"' >> installer.nsi
+          echo 'InstallDir "$INSTALL_DIR"' >> installer.nsi
+          echo 'Page directory' >> installer.nsi
+          echo 'Page instfiles' >> installer.nsi
+          echo 'Section "MainSection"' >> installer.nsi
+          echo '  SetOutPath "$INSTDIR"' >> installer.nsi
+          echo '  File "$EXE_FILE"' >> installer.nsi
+          echo '  CreateShortCut "$DESKTOP\\Number System Converter GUI.lnk" "$INSTDIR\\NumberSystemConverterGUI.exe"' >> installer.nsi
+          echo 'SectionEnd' >> installer.nsi
           
           # Debug the generated script
           type installer.nsi

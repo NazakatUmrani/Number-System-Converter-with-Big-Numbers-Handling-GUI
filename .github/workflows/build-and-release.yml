@@ -165,16 +165,16 @@ jobs:
           
           # Write the NSIS script
           echo '!define APP_NAME "Number System Converter GUI"' > installer.nsi
-          echo '!define EXE_FILE "release/NumberSystemConverterGUI.exe"' >> installer.nsi
-          echo '!define INSTALL_DIR "$PROGRAMFILES\\Number System Converter GUI"' >> installer.nsi
+          echo '!define EXE_FILE "release\NumberSystemConverterGUI.exe"' >> installer.nsi
+          echo '!define INSTALL_DIR "$PROGRAMFILES\Number System Converter GUI"' >> installer.nsi
           echo 'OutFile "NumberSystemConverterGUI-Setup.exe"' >> installer.nsi
           echo 'InstallDir "$INSTALL_DIR"' >> installer.nsi
           echo 'Page directory' >> installer.nsi
           echo 'Page instfiles' >> installer.nsi
           echo 'Section "MainSection"' >> installer.nsi
-          echo '  SetOutPath "$INSTDIR"' >> installer.nsi
+          echo '  SetOutPath "$INSTALL_DIR"' >> installer.nsi
           echo '  File "$EXE_FILE"' >> installer.nsi
-          echo '  CreateShortCut "$DESKTOP\\Number System Converter GUI.lnk" "$INSTDIR\\NumberSystemConverterGUI.exe"' >> installer.nsi
+          echo '  CreateShortCut "$DESKTOP\\Number System Converter GUI.lnk" "$INSTALL_DIR\NumberSystemConverterGUI.exe"' >> installer.nsi
           echo 'SectionEnd' >> installer.nsi
           
           # Debug the generated script
